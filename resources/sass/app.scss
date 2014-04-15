@@ -1,3 +1,7 @@
+$base-color: #42282E;
+
+
+
 // The following two lines import the default Sencha Touch theme. If you are building
 // a new theme, remove them and the add your own CSS on top of the base CSS (which
 // is already included in your app.json file).
@@ -5,6 +9,17 @@
 @import 'sencha-touch/default/all';
 
 // Custom code goes here..
+.x-layout-card-item { 
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-image: url(http://farm4.staticflickr.com/3681/13668399744_3d067f2ec7_b.jpg);
+  }
+
 
 // Examples of using the icon mixin:
 // @include icon('user');

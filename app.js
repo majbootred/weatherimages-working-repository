@@ -14,11 +14,16 @@ Ext.application({
     name: 'weatherimages',
 
     requires: [
-        'Ext.MessageBox'
+        'Ext.MessageBox',
+        'weatherimages.utils.Functions'
     ],
 
     views: [
         'Main'
+    ],
+
+    controllers: [
+    'Main'
     ],
 
     icon: {
@@ -40,6 +45,10 @@ Ext.application({
     },
 
     launch: function() {
+        // just a lauch check
+        console.log("app. js // App launch");
+
+
         // Destroy the #appLoadingIndicator element
         Ext.fly('appLoadingIndicator').destroy();
 

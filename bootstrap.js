@@ -743,6 +743,9 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.viewport.WindowsPhone": [
     "Ext.viewport.WP"
   ],
+  "weatherimages.controller.Main": [],
+  "weatherimages.utils.Functions": [],
+  "weatherimages.view.InfoView": [],
   "weatherimages.view.Main": []
 });
 Ext.ClassManager.addNameAliasMappings({
@@ -1687,6 +1690,11 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.viewport.Ios": [],
   "Ext.viewport.Viewport": [],
   "Ext.viewport.WindowsPhone": [],
+  "weatherimages.controller.Main": [],
+  "weatherimages.utils.Functions": [],
+  "weatherimages.view.InfoView": [
+    "widget.infoview"
+  ],
   "weatherimages.view.Main": [
     "widget.main"
   ]
