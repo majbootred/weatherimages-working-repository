@@ -23,12 +23,16 @@ Ext.define('weatherimages.utils.Functions', {
             timeout: 5000,
             maximumAge: 10000,
             success: function(position) {
-                var place = position.coords.latitude + "," + position.coords.longitude;
+                var latitude = position.coords.latitude;
+                var longitude = position.coords.longitude
+                var place = latitude + "," + longitude;
                 
                 console.log(place);
                 
                 weatherimages.utils.Functions.getWeather(place);
-                
+
+                weatherimages.utils.Functions.getImage(latitude,longitude);
+
                 Ext.Viewport.unmask();
             },
             failure: function() {
@@ -38,6 +42,7 @@ Ext.define('weatherimages.utils.Functions', {
         });
     },
 
+    // weather
     getWeather: function(place) {
         Ext.data.JsonP.request({
             url: '//api.worldweatheronline.com/free/v1/weather.ashx',
@@ -50,6 +55,8 @@ Ext.define('weatherimages.utils.Functions', {
                 date: 'today',
                 extra: 'localObsTime,isDayTime'
             },
+
+
             success: function(result, request) {
                 // console.log(result.data);
                 Ext.Viewport.unmask();
@@ -71,7 +78,7 @@ Ext.define('weatherimages.utils.Functions', {
 
 
                     console.log("getWeather kicked");
-                    console.log(weather);
+                    /*console.log(weather);
                     console.log(desc);
                     console.log(location);
                     console.log(localObsTime);
@@ -79,7 +86,7 @@ Ext.define('weatherimages.utils.Functions', {
                     console.log(humidity);
                     console.log(tempC);
                     console.log(visibility);
-                    console.log(icon);
+                    console.log(icon);*/
 
                 } catch (e) {
                     if(result.data.error){
@@ -98,15 +105,80 @@ Ext.define('weatherimages.utils.Functions', {
 
     createTemplate: function(desc,location,localObsTime,cloudCover,humidity,tempC,visibility,icon) {
 
-        output = "<img src=\"" + icon +"\">";    
-        output += "<strong>Weather Desc: " + desc +"</strong>";
-        output += "<br/> Location: " + location; 
-        output += "<br/> Local Observation Time: " + localObsTime;
-        output += "<br/> Cloud Cover: " + cloudCover;
-        output += "<br/> Humidity: " + humidity;
-        output += "<br/> Temp C: " + tempC;
-        output += "<br/> Visibility: " + visibility;
+        output = "<center><div style=\"background-color:#F5DCB3;opacity:0.6;\">";
+        //output += "<img src=\"" + icon +"\">"; 
+        output += "You are in <span style= \"color:#0E7274\">" + location + " </span> right now."
+        output += "<br/>It's <span style= \"color:#0E7274\">" + desc +"</span> and <span style= \"color:#0E7274\">" + tempC +"</span>.";
+        output += "<br/>";  
+        output += "You have a cloud cover by <span style= \"color:#0E7274\">" + cloudCover+ "</span>, ";
+        output += "humidity by <span style= \"color:#0E7274\">" + humidity+ "</span> and ";
+        output += "the visibility is <span style= \"color:#0E7274\">" + visibility+"</span>.";
+        output += "<br/>";
+        output += "<br/> (the last observation time was <span style= \"color:#0E7274\">" + localObsTime +"</span>.)";
+        output += "</div></center>";
 
         Ext.ComponentQuery.query('main')[0].getActiveItem().setHtml(output);
-    }
+    },
+
+
+    // image   
+    getImage: function(latitude,longitude){
+        console.log(latitude +" "+ longitude);
+        Ext.data.JsonP.request({
+            url: 'http://api.flickr.com/services/rest/?method=flickr.photos.search&format=json',
+            callbackKey: 'jsoncallback',
+            params: {
+                api_key: '19097922acb7e2c6de8b3852845e1299',
+                lat: latitude,
+                lon: longitude,
+                sort: 'date-posted-desc',
+                media: 'photos',
+                radius: '1',
+                extras: 'date_upload,date_taken,description',
+                per_page: '1',
+                page: '1'
+            },
+
+            callback: function(successful, data ) {
+               
+
+                Ext.Viewport.unmask();
+
+                try {
+                    console.log('++++++++');
+                    console.log(data);
+                    console.log('++++++++');
+
+
+                    var farmid = data.photos.photo[0].farm;
+                    var serverid = data.photos.photo[0].server;
+                    var id = data.photos.photo[0].id;
+                    var secret = data.photos.photo[0].secret;
+                    var dateposted = data.photos.photo[0].dateupload;
+
+                    var d = new Date();
+                    d.setTime(dateposted);
+
+                    var url = "http://farm"+farmid+".staticflickr.com/"+serverid+"/"+id+"_"+secret+"_b.jpg";
+
+                    document.getElementsByClassName('x-layout-card-item')[0].style.backgroundImage = "url("+url+")";
+                    //document.getElementsByTagName('html')[0].style.backgroundImage = "url("+url+")";
+
+                    console.log("flickr url: " + url);
+
+                } catch (e) {
+                    if(data.stat){
+                        Ext.Msg.alert("Error", data.message);
+                    } else {
+                        Ext.Msg.alert("Oops", e);
+                    }
+                }
+            },
+
+            failure: function(e) {
+                Ext.Viewport.unmask();
+                Ext.Msg.alert("Oops", "Can not request data from flickr.com");
+            }
+        });
+    } 
 });

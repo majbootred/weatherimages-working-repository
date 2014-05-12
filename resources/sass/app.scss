@@ -1,4 +1,4 @@
-$base-color: #42282E;
+$base-color: #60514C;
 
 
 
@@ -7,6 +7,7 @@ $base-color: #42282E;
 // is already included in your app.json file).
 @import 'sencha-touch/default';
 @import 'sencha-touch/default/all';
+//@import 'url(http://fonts.googleapis.com/css?family=Pacifico)';
 
 // Custom code goes here..
 .x-layout-card-item { 
@@ -17,9 +18,10 @@ $base-color: #42282E;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background-image: url(http://farm4.staticflickr.com/3681/13668399744_3d067f2ec7_b.jpg);
+    background-image: url(https://farm1.staticflickr.com/146/374746707_c4d36ef12d_b.jpg);
   }
 
+ html,body {font-family: 'Pacifico', cursive;}
 
 // Examples of using the icon mixin:
 // @include icon('user');

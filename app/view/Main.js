@@ -28,7 +28,7 @@ Ext.define('weatherimages.view.Main', {
             }]
         },
         {
-            html: 'Hier kommt die Wetter Info rein'
+            html: 'incoming weather data ...'
         },{
             itemId: 'mainview',
             cls: 'textview'
