@@ -105,7 +105,7 @@ Ext.define('weatherimages.utils.Functions', {
 
     createTemplate: function(desc,location,localObsTime,cloudCover,humidity,tempC,visibility,icon) {
 
-        output = "<center><div style=\"background-color:#F5DCB3;opacity:0.6;\">";
+        output = "<center><div style=\"background-color:#F5DCB3;opacity:0.9;\">";
         //output += "<img src=\"" + icon +"\">"; 
         output += "You are in <span style= \"color:#0E7274\">" + location + " </span> right now."
         output += "<br/>It's <span style= \"color:#0E7274\">" + desc +"</span> and <span style= \"color:#0E7274\">" + tempC +"</span>.";
@@ -114,7 +114,7 @@ Ext.define('weatherimages.utils.Functions', {
         output += "humidity by <span style= \"color:#0E7274\">" + humidity+ "</span> and ";
         output += "the visibility is <span style= \"color:#0E7274\">" + visibility+"</span>.";
         output += "<br/>";
-        output += "<br/> (the last observation time was <span style= \"color:#0E7274\">" + localObsTime +"</span>.)";
+        output += "<br/> (The last observation time was <span style= \"color:#0E7274\">" + localObsTime +"</span>.)";
         output += "</div></center>";
 
         Ext.ComponentQuery.query('main')[0].getActiveItem().setHtml(output);
@@ -180,5 +180,9 @@ Ext.define('weatherimages.utils.Functions', {
                 Ext.Msg.alert("Oops", "Can not request data from flickr.com");
             }
         });
-    } 
+    } ,
+
+    setInfoText: function() {
+        Ext.ComponentQuery.query('main')[0].getActiveItem().setHtml('fuuu');
+    }
 });

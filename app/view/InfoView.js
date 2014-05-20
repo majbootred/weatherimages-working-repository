@@ -6,7 +6,7 @@ Ext.define('weatherimages.view.InfoView', {
         'Ext.TitleBar'
     ],
     config: {
-        direction: 'vertical',
+        //direction: 'vertical',
         items: [
         {
             xtype: 'titlebar',
