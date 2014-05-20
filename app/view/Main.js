@@ -11,7 +11,7 @@ Ext.define('weatherimages.view.Main', {
             xtype: 'titlebar',
             cls: 'title',
             docked: 'top',
-            title: 'Weather Images',
+            title: 'weatherimages',
             items: [{
                cls: 'back',
                hidden: true,

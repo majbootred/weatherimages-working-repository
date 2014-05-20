@@ -114,7 +114,7 @@ Ext.define('weatherimages.utils.Functions', {
         output += "humidity by <span style= \"color:#0E7274\">" + humidity+ "</span> and ";
         output += "the visibility is <span style= \"color:#0E7274\">" + visibility+"</span>.";
         output += "<br/>";
-        output += "<br/> (the last observation time was <span style= \"color:#0E7274\">" + localObsTime +"</span>.)";
+        output += "<br/> (The last observation time was <span style= \"color:#0E7274\">" + localObsTime +"</span>.)";
         output += "</div></center>";
 
         Ext.ComponentQuery.query('main')[0].getActiveItem().setHtml(output);
