@@ -66,7 +66,7 @@ Ext.define('weatherimages.utils.Functions', {
                     
 
                     var desc = weather.current_condition[0].weatherDesc[0].value;
-                    var location = weather.nearest_area[0].region[0].value + " " + weather.nearest_area[0].areaName[0].value + ", " + weather.nearest_area[0].country[0].value;
+                    var location = weather.nearest_area[0].region[0].value + /*" " + weather.nearest_area[0].areaName[0].value +*/ ", " + weather.nearest_area[0].country[0].value;
                     var localObsTime = weather.current_condition[0].localObsDateTime;
                     var cloudCover = weather.current_condition[0].cloudcover + "%";
                     var humidity = weather.current_condition[0].humidity + "%";
@@ -78,8 +78,8 @@ Ext.define('weatherimages.utils.Functions', {
 
 
                     console.log("getWeather kicked");
-                    /*console.log(weather);
-                    console.log(desc);
+                    //console.log(weather);
+                    /*console.log(desc);
                     console.log(location);
                     console.log(localObsTime);
                     console.log(cloudCover);
@@ -105,17 +105,19 @@ Ext.define('weatherimages.utils.Functions', {
 
     createTemplate: function(desc,location,localObsTime,cloudCover,humidity,tempC,visibility,icon) {
 
-        output = "<center><div style=\"background-color:#F5DCB3;opacity:0.9;\">";
-        //output += "<img src=\"" + icon +"\">"; 
-        output += "You are in <span style= \"color:#0E7274\">" + location + " </span> right now."
-        output += "<br/>It's <span style= \"color:#0E7274\">" + desc +"</span> and <span style= \"color:#0E7274\">" + tempC +"</span>.";
-        output += "<br/>";  
-        output += "You have a cloud cover by <span style= \"color:#0E7274\">" + cloudCover+ "</span>, ";
-        output += "humidity by <span style= \"color:#0E7274\">" + humidity+ "</span> and ";
-        output += "the visibility is <span style= \"color:#0E7274\">" + visibility+"</span>.";
-        output += "<br/>";
-        output += "<br/> (The last observation time was <span style= \"color:#0E7274\">" + localObsTime +"</span>.)";
-        output += "</div></center>";
+        output = "<div class=\"container\">";
+        output += "<div class=\"main\">";
+        output += "Location ";
+        output += "<span class= \"highlight\">" + location + " </span> <br/>"; 
+        output += "Weather Condition ";
+        output += "<span class= \"highlight\">" + desc +"</span> and <span class= \"highlight\"> " + tempC +"</span><br/>";  
+        output += "Cloud Cover ";
+        output += "<span class= \"highlight\">" + cloudCover+ "</span><br/>";
+        output += "Humidity ";
+        output += "<span class= \"highlight\">" + humidity+ "</span><br/>";
+        output += "Visibility ";
+        output += "<span class= \"highlight\">" + visibility+ "</span><br/>";
+        output += "</div></div>";
 
         Ext.ComponentQuery.query('main')[0].getActiveItem().setHtml(output);
     },
@@ -146,7 +148,7 @@ Ext.define('weatherimages.utils.Functions', {
 
                 try {
                     console.log('++++++++');
-                    console.log(data);
+                    //console.log(data);
                     console.log('++++++++');
 
 
@@ -162,7 +164,6 @@ Ext.define('weatherimages.utils.Functions', {
                     var url = "http://farm"+farmid+".staticflickr.com/"+serverid+"/"+id+"_"+secret+"_b.jpg";
 
                     document.getElementsByClassName('x-layout-card-item')[0].style.backgroundImage = "url("+url+")";
-                    //document.getElementsByTagName('html')[0].style.backgroundImage = "url("+url+")";
 
                     console.log("flickr url: " + url);
 
@@ -180,9 +181,5 @@ Ext.define('weatherimages.utils.Functions', {
                 Ext.Msg.alert("Oops", "Can not request data from flickr.com");
             }
         });
-    } ,
-
-    setInfoText: function() {
-        Ext.ComponentQuery.query('main')[0].getActiveItem().setHtml('fuuu');
     }
 });
