@@ -66,7 +66,7 @@ Ext.define('weatherimages.utils.Functions', {
                     
 
                     var desc = weather.current_condition[0].weatherDesc[0].value;
-                    var location = weather.nearest_area[0].region[0].value + /*" " + weather.nearest_area[0].areaName[0].value +*/ ", " + weather.nearest_area[0].country[0].value;
+                    var location = weather.nearest_area[0].region[0].value + ", " + weather.nearest_area[0].areaName[0].value + ", " + weather.nearest_area[0].country[0].value;
                     var localObsTime = weather.current_condition[0].localObsDateTime;
                     var cloudCover = weather.current_condition[0].cloudcover + "%";
                     var humidity = weather.current_condition[0].humidity + "%";
@@ -127,7 +127,7 @@ Ext.define('weatherimages.utils.Functions', {
     getImage: function(latitude,longitude){
         console.log(latitude +" "+ longitude);
         Ext.data.JsonP.request({
-            url: 'http://api.flickr.com/services/rest/?method=flickr.photos.search&format=json',
+            url: 'https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json',
             callbackKey: 'jsoncallback',
             params: {
                 api_key: '19097922acb7e2c6de8b3852845e1299',
@@ -161,7 +161,7 @@ Ext.define('weatherimages.utils.Functions', {
                     var d = new Date();
                     d.setTime(dateposted);
 
-                    var url = "http://farm"+farmid+".staticflickr.com/"+serverid+"/"+id+"_"+secret+"_b.jpg";
+                    var url = "https://farm"+farmid+".staticflickr.com/"+serverid+"/"+id+"_"+secret+"_b.jpg";
 
                     document.getElementsByClassName('x-layout-card-item')[0].style.backgroundImage = "url("+url+")";
 
